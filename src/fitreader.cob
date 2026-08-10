@@ -15,10 +15,14 @@
        FILE SECTION.
       *>   File Description (FD) defines the record structure
        FD  FIT-FILE.
-       01  FIT-RECORD.
-           05  FIT-ID        PIC 9(05).
-           05  FIT-NAME      PIC X(20).
-           05  FIT-DEPT      PIC X(10).
+       01  FIT-FILE-ID.
+           05  FILE-TYPE        PIC 9(05).                              Look up
+           05  MANUFACTURER     PIC X(20).                              types
+           05  PRODUCT          PIC X(10).                              in FIT
+           05  PRODUCT-NAME     PIC X(10).                              file
+           05  SERIAL-NUMBER    PIC X(10).                              spec
+           05  TIME-CREATED     PIC X(10).
+           05  NUMBER           PIC X(10).
       *>   Line feed at end of record for display purposes
            05  LINEFEED      PIC X(2).
 

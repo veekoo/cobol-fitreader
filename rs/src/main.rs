@@ -17,7 +17,7 @@ fn main() {
         }
     };
 
-    let fit = match fitparser::FitData::new(&bytes) {
+    let fit = match fitparser::from_bytes(&bytes) {
         Ok(fit) => fit,
         Err(err) => {
             eprintln!("failed to parse FIT file '{}': {}", path, err);
@@ -25,19 +25,21 @@ fn main() {
         }
     };
 
-    match fit.messages() {
-        Ok(messages) => {
+    match fit {
+        messages => {
             for message in messages {
-                println!("Message: {}", message.name());
+                println!("Message: {}", message.kind());
                 for field in message.fields() {
                     println!("  {} = {:?}", field.name(), field.value());
                 }
                 println!();
             }
         }
+/*
         Err(err) => {
             eprintln!("failed to decode messages from '{}': {}", path, err);
             process::exit(1);
         }
+*/
     }
 }

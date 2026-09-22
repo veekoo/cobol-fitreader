@@ -15,16 +15,16 @@
        FILE SECTION.
       *>   File Description (FD) defines the record structure
        FD  FIT-FILE.
-       01  FIT-FILE-ID.
+       01  FIT-HEADER.
            05  FILE-TYPE        PIC 9(05).                              Look up
            05  MANUFACTURER     PIC X(20).                              types
            05  PRODUCT          PIC X(10).                              in FIT
            05  PRODUCT-NAME     PIC X(10).                              file
            05  SERIAL-NUMBER    PIC X(10).                              spec
            05  TIME-CREATED     PIC X(10).
-           05  NUMBER           PIC X(10).
+           05  NUMBER-VALUE     PIC X(10).
       *>   Line feed at end of record for display purposes
-           05  LINEFEED      PIC X(2).
+           05  LINEFEED         PIC X(2).
 
        WORKING-STORAGE SECTION.
       *>   Variables for end-of-file tracking and display staging
@@ -59,8 +59,9 @@
 
        2000-PROCESS-RECORD.
       *>   Process the record fields currently loaded in the FILE SECTION
-           DISPLAY "ID: " FIT-ID " | Name: " FIT-NAME " | Dept: "
-               FIT-DEPT.
+           DISPLAY "ID: " FILE-TYPE " | Name: " PRODUCT-NAME
+               " | Manufacturer: " MANUFACTURER
+               " | Number: " NUMBER-VALUE.
            
       *>   Read next record to continue or terminate the loop
            PERFORM 1000-READ-RECORD.
